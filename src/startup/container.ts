@@ -2,7 +2,7 @@ import { createContainer, asClass, asValue, asFunction } from 'awilix'
 import config from '../config'
 import app from '.'
 //services
-import { HomeService } from '../services'
+import { HomeService, OrgService, UserService, ProductService } from '../services'
 //constrollers
 import { HomeController } from '../controllers'
 //routes
@@ -22,7 +22,10 @@ container
         config: asValue(config)
     })
     .register({
-        HomeService: asClass(HomeService).singleton()
+        HomeService: asClass(HomeService).singleton(),
+        OrgService: asClass(OrgService).singleton(),
+        UserService: asClass(UserService).singleton(),
+        ProductService: asClass(ProductService).singleton(),
     })
     .register({
         HomeController: asClass(HomeController.bind(HomeController)).singleton()
