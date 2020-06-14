@@ -10,6 +10,8 @@ import { HomeRoutes } from '../routes/index.route'
 import Routes from '../routes/index'
 //models
 import { Org, Product, User } from '../models/index'
+//repositories
+import { OrgRepository, ProductRepository, UserRepository } from '../repositories'
 
 const container = createContainer()
 
@@ -32,6 +34,11 @@ container
         User: asValue(User),
         Product: asValue(Product),
         Org: asValue(Org)
+    })
+    .register({
+        OrgRepository: asClass(OrgRepository).singleton(),
+        ProductRepository: asClass(ProductRepository).singleton(),
+        UserRepository: asClass(UserRepository).singleton(),
     })
 
 export default container
