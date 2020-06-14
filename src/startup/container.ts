@@ -8,6 +8,8 @@ import { HomeController } from '../controllers'
 //routes
 import { HomeRoutes } from '../routes/index.route'
 import Routes from '../routes/index'
+//models
+import { Org, Product, User } from '../models/index'
 
 const container = createContainer()
 
@@ -25,6 +27,11 @@ container
     })
     .register({
         HomeRoutes: asFunction(HomeRoutes).singleton()
+    })
+    .register({
+        User: asValue(User),
+        Product: asValue(Product),
+        Org: asValue(Org)
     })
 
 export default container
