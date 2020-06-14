@@ -22,7 +22,7 @@ const OrgSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'org owner is required'],
-        autopopulate: true
+        //autopopulate: true
     },
     products: [{
         type: Schema.Types.ObjectId,
