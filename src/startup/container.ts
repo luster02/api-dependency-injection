@@ -4,7 +4,7 @@ import app from '.'
 //services
 import { HomeService, OrgService, UserService, ProductService } from '../services'
 //constrollers
-import { HomeController } from '../controllers'
+import { HomeController, OrgController, ProductController, UserController } from '../controllers'
 //routes
 import { HomeRoutes } from '../routes/index.route'
 import Routes from '../routes/index'
@@ -26,9 +26,13 @@ container
         OrgService: asClass(OrgService).singleton(),
         UserService: asClass(UserService).singleton(),
         ProductService: asClass(ProductService).singleton(),
+        config: asValue(config)
     })
     .register({
-        HomeController: asClass(HomeController.bind(HomeController)).singleton()
+        HomeController: asClass(HomeController.bind(HomeController)).singleton(),
+        OrgController: asClass(OrgController.bind(OrgController)).singleton(),
+        ProductController: asClass(ProductController.bind(ProductController)).singleton(),
+        UserController: asClass(UserController.bind(UserController)).singleton(),
     })
     .register({
         HomeRoutes: asFunction(HomeRoutes).singleton()
