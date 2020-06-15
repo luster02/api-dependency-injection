@@ -6,7 +6,7 @@ import { HomeService, OrgService, UserService, ProductService } from '../service
 //constrollers
 import { HomeController, OrgController, ProductController, UserController } from '../controllers'
 //routes
-import { HomeRoutes } from '../routes/index.route'
+import { HomeRoutes, ProductRoutes, OrgRoutes, UserRoutes } from '../routes/index.route'
 import Routes from '../routes/index'
 //models
 import { Org, Product, User } from '../models/index'
@@ -17,11 +17,13 @@ const container = createContainer()
 
 container
     .register({
+        //app register
         app: asClass(app).singleton(),
         router: asFunction(Routes).singleton(),
         config: asValue(config)
     })
     .register({
+        //service register
         HomeService: asClass(HomeService).singleton(),
         OrgService: asClass(OrgService).singleton(),
         UserService: asClass(UserService).singleton(),
@@ -29,20 +31,27 @@ container
         config: asValue(config)
     })
     .register({
+        //controller register
         HomeController: asClass(HomeController.bind(HomeController)).singleton(),
         OrgController: asClass(OrgController.bind(OrgController)).singleton(),
         ProductController: asClass(ProductController.bind(ProductController)).singleton(),
         UserController: asClass(UserController.bind(UserController)).singleton(),
     })
     .register({
-        HomeRoutes: asFunction(HomeRoutes).singleton()
+        //routes register
+        HomeRoutes: asFunction(HomeRoutes).singleton(),
+        ProductRoutes: asFunction(ProductRoutes).singleton(),
+        OrgRoutes: asFunction(OrgRoutes).singleton(),
+        UserRoutes: asFunction(UserRoutes).singleton(),
     })
     .register({
+        //models register
         User: asValue(User),
         Product: asValue(Product),
         Org: asValue(Org)
     })
     .register({
+        //repositories register
         OrgRepository: asClass(OrgRepository).singleton(),
         ProductRepository: asClass(ProductRepository).singleton(),
         UserRepository: asClass(UserRepository).singleton(),

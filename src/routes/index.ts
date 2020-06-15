@@ -6,7 +6,7 @@ import compression from 'compression'
 import 'express-async-errors'
 import { ErrorMidd, NotFoundMidd } from '../middlewares'
 
-export default ({ HomeRoutes }: any) => {
+export default ({ HomeRoutes, ProductRoutes, OrgRoutes, UserRoutes }: any) => {
     const router = Router()
     const apiRoutes = Router()
 
@@ -19,6 +19,10 @@ export default ({ HomeRoutes }: any) => {
         .use(express.urlencoded({ extended: true }))
 
     apiRoutes.use('/home', HomeRoutes)
+    apiRoutes.use('/user', UserRoutes)
+    apiRoutes.use('/product', ProductRoutes)
+    apiRoutes.use('/org', OrgRoutes)
+
 
     router.use("/v1/api", apiRoutes)
 
