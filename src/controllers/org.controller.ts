@@ -23,6 +23,15 @@ export class OrgController {
         return res.json({ ok: false, data: 'error' })
     }
 
+    async getOwnerOrg(req: Request, res: Response) {
+        const { owner } = req.params
+        const orgs = await this._orgService.getOwnerOrg(owner)
+        if (orgs) {
+            return res.json({ ok: true, data: orgs })
+        }
+        return res.json({ ok: false, data: 'error' })
+    }
+
     async create(req: Request, res: Response) {
         const { body } = req
         const org = await this._orgService.create(body)
