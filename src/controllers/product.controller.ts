@@ -1,14 +1,14 @@
 import { Request, Response } from 'express'
+let _productService: any
 
 export class ProductController {
-    private _productService: any
     constructor({ ProductService }: any) {
-        this._productService = ProductService
+        _productService = ProductService
     }
 
     async get(req: Request, res: Response) {
         const { orgId } = req.params
-        const org = await this._productService.get(orgId)
+        const org = await _productService.get(orgId)
         if (org) {
             return res.json({ ok: true, data: org })
         }
@@ -16,7 +16,7 @@ export class ProductController {
     }
 
     async getAll(req: Request, res: Response) {
-        const orgs = await this._productService.getAll()
+        const orgs = await _productService.getAll()
         if (orgs) {
             return res.json({ ok: true, data: orgs })
         }
@@ -26,7 +26,7 @@ export class ProductController {
     async create(req: Request, res: Response) {
         const { body } = req
         const { orgId } = req.params
-        const org = await this._productService.createProduct(orgId, body)
+        const org = await _productService.createProduct(orgId, body)
         if (org) {
             return res.json({ ok: true, data: org })
         }
@@ -36,7 +36,7 @@ export class ProductController {
     async update(req: Request, res: Response) {
         const { body } = req
         const { orgId } = req.params
-        const org = await this._productService.update(orgId, body)
+        const org = await _productService.update(orgId, body)
         if (org) {
             return res.json({ ok: true, data: org })
         }
@@ -46,7 +46,7 @@ export class ProductController {
     async updateImage(req: Request, res: Response) {
         const { file } = req
         const { productId } = req.params
-        const product = await this._productService.updateImage(productId, file.path)
+        const product = await _productService.updateImage(productId, file.path)
         if (product) {
             return res.json({ ok: true, data: product })
         }
@@ -55,7 +55,7 @@ export class ProductController {
 
     async delete(req: Request, res: Response) {
         const { orgId, productId } = req.params
-        const org = await this._productService.deleteProduct(orgId, productId)
+        const org = await _productService.deleteProduct(orgId, productId)
         if (org) {
             return res.json({ ok: true, data: org })
         }

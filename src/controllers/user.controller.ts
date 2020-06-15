@@ -1,14 +1,14 @@
 import { Request, Response } from 'express'
+let _userService: any
 
 export class UserController {
-    private _userService: any
     constructor({ UserService }: any) {
-        this._userService = UserService
+        _userService = UserService
     }
 
     async get(req: Request, res: Response) {
         const { userId } = req.params
-        const user = await this._userService.get(userId)
+        const user = await _userService.get(userId)
         if (user) {
             return res.json({ ok: true, data: user })
         }
@@ -16,7 +16,7 @@ export class UserController {
     }
 
     async getAll(req: Request, res: Response) {
-        const users = await this._userService.getAll()
+        const users = await _userService.getAll()
         if (users) {
             return res.json({ ok: true, data: users })
         }
@@ -26,7 +26,7 @@ export class UserController {
     async update(req: Request, res: Response) {
         const { body } = req
         const { userId } = req.params
-        const user = await this._userService.update(userId, body)
+        const user = await _userService.update(userId, body)
         if (user) {
             return res.json({ ok: true, data: user })
         }
@@ -35,7 +35,7 @@ export class UserController {
 
     async delete(req: Request, res: Response) {
         const { userId } = req.params
-        const user = await this._userService.delete(userId)
+        const user = await _userService.delete(userId)
         if (user) {
             return res.json({ ok: true, data: user })
         }
