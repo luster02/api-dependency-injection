@@ -11,5 +11,6 @@ export default {
     CLOUDINARY_KEY: process.env.CLOUDINARY_KEY,
     CLOUDINARY_SECRET: process.env.CLOUDINARY_SECRET,
     CLOUDINARY_ENV: process.env.CLOUDINARY_ENV,
-    JWT_SECRET: process.env.JWT_SECRET
+    JWT_SECRET: process.env.JWT_SECRET,
+    CACHE_KEY: process.env.CACHE_KEY
 }
