@@ -32,9 +32,10 @@ export class OrgController {
         return res.json({ ok: false, data: 'error' })
     }
 
-    async create(req: Request, res: Response) {
+    async create(req: any, res: Response) {
         const { body } = req
-        const org = await _orgService.create(body)
+        const { _id } = req.user
+        const org = await _orgService.createOrg(body, _id)
         if (org) {
             return res.json({ ok: true, data: org })
         }

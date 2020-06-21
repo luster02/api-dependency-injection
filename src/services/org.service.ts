@@ -20,6 +20,10 @@ export class OrgService extends BaseService {
         )
     }
 
+    async createOrg(org: any, owner: string) {
+        return await _orgRepository.create({ ...org, owner })
+    }
+
     async getOwnerOrg(owner: any) {
         return await _orgRepository.getOwnerOrg(owner)
     }
