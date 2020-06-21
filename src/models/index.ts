@@ -1,3 +1,6 @@
 export { Org } from './org.model'
 export { Product } from './products.model'
 export { User } from './user.model'
+export { Customer } from './customer.model'
+export { History } from './history.model'
+export { Cart } from './cart.model'

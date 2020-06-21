@@ -9,7 +9,7 @@ import { HomeController, OrgController, ProductController, UserController, AuthC
 import { HomeRoutes, ProductRoutes, OrgRoutes, UserRoutes, AuthRoutes } from '../routes/index.route'
 import Routes from '../routes/index'
 //models
-import { Org, Product, User } from '../models/index'
+import { Org, Product, User, Cart, History, Customer } from '../models/index'
 //repositories
 import { OrgRepository, ProductRepository, UserRepository } from '../repositories'
 
@@ -51,7 +51,10 @@ container
         //models register
         User: asValue(User),
         Product: asValue(Product),
-        Org: asValue(Org)
+        Org: asValue(Org),
+        Cart: asValue(Cart),
+        History: asValue(History),
+        Customer: asValue(Customer),
     })
     .register({
         //repositories register
