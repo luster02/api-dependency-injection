@@ -2,16 +2,54 @@ import { createContainer, asClass, asValue, asFunction } from 'awilix'
 import config from '../config'
 import app from '.'
 //services
-import { HomeService, OrgService, UserService, ProductService, AuthService } from '../services'
+import {
+    HomeService,
+    OrgService,
+    UserService,
+    ProductService,
+    AuthService,
+    CartService,
+    CustomerService,
+    HistoryService
+} from '../services'
 //constrollers
-import { HomeController, OrgController, ProductController, UserController, AuthController } from '../controllers'
+import {
+    HomeController,
+    OrgController,
+    ProductController,
+    UserController,
+    AuthController,
+    CartController,
+    CustomerController,
+    HistoryController
+} from '../controllers'
 //routes
-import { HomeRoutes, ProductRoutes, OrgRoutes, UserRoutes, AuthRoutes } from '../routes/index.route'
+import {
+    HomeRoutes,
+    ProductRoutes,
+    OrgRoutes,
+    UserRoutes,
+    AuthRoutes
+} from '../routes/index.route'
 import Routes from '../routes/index'
 //models
-import { Org, Product, User, Cart, History, Customer } from '../models/index'
+import {
+    Org,
+    Product,
+    User,
+    Cart,
+    History,
+    Customer
+} from '../models/index'
 //repositories
-import { OrgRepository, ProductRepository, UserRepository } from '../repositories'
+import {
+    OrgRepository,
+    ProductRepository,
+    UserRepository,
+    CartRepository,
+    CustomerRepository,
+    HistoryRepository
+} from '../repositories'
 
 const container = createContainer()
 
@@ -29,6 +67,9 @@ container
         UserService: asClass(UserService).singleton(),
         ProductService: asClass(ProductService).singleton(),
         AuthService: asClass(AuthService),
+        CartService: asClass(CartService).singleton(),
+        CustomerService: asClass(CustomerService).singleton(),
+        HistoryService: asClass(HistoryService).singleton(),
         config: asValue(config)
     })
     .register({
@@ -37,7 +78,10 @@ container
         OrgController: asClass(OrgController.bind(OrgController)).singleton(),
         ProductController: asClass(ProductController.bind(ProductController)).singleton(),
         UserController: asClass(UserController.bind(UserController)).singleton(),
-        AuthController: asClass(AuthController.bind(AuthController)).singleton()
+        AuthController: asClass(AuthController.bind(AuthController)).singleton(),
+        CartController: asClass(CartController).singleton(),
+        CustomerController: asClass(CustomerController).singleton(),
+        HistoryController: asClass(HistoryController).singleton(),
     })
     .register({
         //routes register
@@ -61,6 +105,9 @@ container
         OrgRepository: asClass(OrgRepository).singleton(),
         ProductRepository: asClass(ProductRepository).singleton(),
         UserRepository: asClass(UserRepository).singleton(),
+        CartRepository: asClass(CartRepository).singleton(),
+        CustomerRepository: asClass(CustomerRepository).singleton(),
+        HistoryRepository: asClass(HistoryRepository).singleton(),
     })
 
 export default container
