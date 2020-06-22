@@ -4,5 +4,5 @@ export const UserRepositoryMock = {
     create: jest.fn(),
     update: jest.fn(),
     delete: jest.fn(),
-    getUserByUsername: jest.fn()
+    getUserByEmail: jest.fn()
 }
