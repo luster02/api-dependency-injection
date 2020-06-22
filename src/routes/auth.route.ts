@@ -5,6 +5,8 @@ export const AuthRoutes = ({ AuthController }: any) => {
 
     router.post('/signin', AuthController.signIn)
     router.post('/signup', AuthController.signUp)
+    router.post('/loginCustomer', AuthController.loginCustomer)
+    router.post('/registerCustomer', AuthController.registerCustomer)
 
     return router
 }
