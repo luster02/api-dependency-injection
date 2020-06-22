@@ -2,11 +2,13 @@ import { generateToken } from '../helpers/jwt.helper'
 import { ErrorRequest } from '../helpers/error-request.helper'
 let _userService: any = null
 let _customerService: any
+let _cartService: any = null
 
 export class AuthService {
-    constructor({ UserService, CustomerService }: any) {
+    constructor({ UserService, CustomerService, CartService }: any) {
         _userService = UserService
         _customerService = CustomerService
+        _cartService = CartService
     }
 
     async signUp(user: any) {
@@ -15,7 +17,13 @@ export class AuthService {
         if (userExist) {
             throw ErrorRequest(400, "email already taken")
         }
-        return await _userService.create(user)
+        const userCreated = await _userService.create(user)
+        const userToEncode = {
+            id: userCreated._id,
+            name: userCreated.name,
+        }
+        const token = generateToken(userToEncode)
+        return { token, user: userCreated }
     }
 
     async registerCustomer(customer: any) {
@@ -24,7 +32,14 @@ export class AuthService {
         if (customerExist) {
             throw ErrorRequest(400, "email already taken")
         }
-        return await _customerService.create(customer)
+        const userCreated = await _customerService.create(customer)
+        const userToEncode = {
+            id: userCreated._id,
+            name: userCreated.name,
+        }
+        const token = generateToken(userToEncode)
+        await _cartService.createCart(userCreated._id)
+        return { token, user: userCreated }
     }
 
     async signIn(user: any) {
