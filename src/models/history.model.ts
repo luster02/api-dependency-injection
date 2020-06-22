@@ -13,6 +13,20 @@ const HistorySchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now()
+    },
+    customer: {
+        type: Schema.Types.ObjectId,
+        ref: 'Customer',
+        required: [true, 'owner is required']
+    },
+    org: {
+        type: Schema.Types.ObjectId,
+        ref: 'Org',
+        required: [true, 'org is required']
+    },
+    completed: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -22,6 +36,8 @@ interface IHistory extends Document {
     products: string
     totalPrice: number
     createdAt: Date
+    customer: string
+    completed: Boolean
 }
 
 HistorySchema.pre<IHistory>('save', function (next) {
