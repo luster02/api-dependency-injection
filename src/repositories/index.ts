@@ -1,3 +1,6 @@
 export { UserRepository } from './user.repository'
 export { OrgRepository } from './org.repository'
 export { ProductRepository } from './product.repository'
+export { CustomerRepository } from './customer.repository'
+export { CartRepository } from './cart.repository'
+export { HistoryRepository } from './history.repository'
