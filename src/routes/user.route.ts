@@ -7,9 +7,8 @@ export const UserRoutes = ({ UserController }: any) => {
     const router = Router()
 
     router.get('/', [verifyToken, cacheMidd(cacheHelp.ONE_MINUTE)], UserController.getAll)
-    router.get('/:userId', UserController.get)
-    router.patch('/:userId', UserController.update)
-    router.delete('/:userId', UserController.delete)
+    router.get('/current', verifyToken, UserController.get)
+    router.patch('/:userId', verifyToken, UserController.update)
 
     return router
 }

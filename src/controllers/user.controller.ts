@@ -6,9 +6,9 @@ export class UserController {
         _userService = UserService
     }
 
-    async get(req: Request, res: Response) {
-        const { userId } = req.params
-        const user = await _userService.get(userId)
+    async get(req: any, res: Response) {
+        const { _id } = req.user
+        const user = await _userService.get(_id)
         if (user) {
             return res.json({ ok: true, data: user })
         }
@@ -33,12 +33,4 @@ export class UserController {
         return res.json({ ok: false, data: 'error' })
     }
 
-    async delete(req: Request, res: Response) {
-        const { userId } = req.params
-        const user = await _userService.delete(userId)
-        if (user) {
-            return res.json({ ok: true, data: user })
-        }
-        return res.json({ ok: false, data: 'error' })
-    }
 }
