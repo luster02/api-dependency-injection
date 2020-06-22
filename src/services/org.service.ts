@@ -1,5 +1,6 @@
 import { BaseService } from "./base.service";
 import { cloudinaryConfig, deletePhoto, uploadPhoto } from '../helpers/cludinary.helper'
+import { ErrorRequest } from '../helpers/error-request.helper'
 
 let _orgRepository: any = null
 let _config: any = null
@@ -31,17 +32,11 @@ export class OrgService extends BaseService {
     async updateLogo(orgId: any, file: any) {
         try {
             if (!orgId) {
-                const error: any = new Error()
-                error.status = 400
-                error.message = "orgId must be sent"
-                throw error
+                throw ErrorRequest(400, "orgId must be sent")
             }
             const org = await _orgRepository.get(orgId)
             if (!org) {
-                const error: any = new Error()
-                error.status = 404
-                error.message = "org does not exist"
-                throw error
+                throw ErrorRequest(404, "org does not exist")
             }
             if (org.logoId) {
                 await deletePhoto(org.logoId)

@@ -1,3 +1,5 @@
+import { ErrorRequest } from '../helpers/error-request.helper'
+
 export class BaseService {
     private _repository: any
     constructor(repository: any) {
@@ -6,18 +8,12 @@ export class BaseService {
 
     async get(id: string) {
         if (!id) {
-            const error: any = new Error()
-            error.status = 400
-            error.message = "id must be sent"
-            throw error
+            throw ErrorRequest(400, "id must be sent")
         }
         const currentEntity = await this._repository.get(id)
 
         if (!currentEntity) {
-            const error: any = new Error()
-            error.status = 404
-            error.message = "entiti does not found"
-            throw error
+            throw ErrorRequest(404, "entity does not found")
         }
 
         return currentEntity
@@ -33,20 +29,14 @@ export class BaseService {
 
     async update(id: string, entity: any) {
         if (!id) {
-            const error: any = new Error()
-            error.status = 400
-            error.message = "id must be sent"
-            throw error
+            throw ErrorRequest(400, "id must be sent")
         }
         return await this._repository.update(id, entity)
     }
 
     async delete(id: string) {
         if (!id) {
-            const error: any = new Error()
-            error.status = 400
-            error.message = "id must be sent"
-            throw error
+            throw ErrorRequest(400, "id must be sent")
         }
         return await this._repository.delete(id)
     }
