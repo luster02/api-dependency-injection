@@ -1,4 +1,5 @@
 import { Schema, Document, model } from 'mongoose'
+import Autopopulate from 'mongoose-autopopulate'
 
 const CartSchema = new Schema({
     customer: {
@@ -8,23 +9,21 @@ const CartSchema = new Schema({
     },
     products: [{
         type: Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'Product',
+        autopopulate: true
     }],
     totalPrice: {
         type: Number,
         default: 0
-    },
-    payed: {
-        type: Boolean,
-        default: false
     }
 })
+
+CartSchema.plugin(Autopopulate)
 
 interface ICart extends Document {
     customer: string
     products: string
     totalPrice: string
-    payed: Boolean
 }
 
 export const Cart = model<ICart>('Cart', CartSchema)
