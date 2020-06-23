@@ -1,6 +1,12 @@
 language: node_js
 node_js:
   - stable
+before_install:
+  - npm install -g node-gyp
+before_script:
+  - npm run build
+script:
+  - npm test
 deploy:
   provider: heroku
   app: e-commerce-api-react
