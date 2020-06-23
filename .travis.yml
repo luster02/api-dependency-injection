@@ -7,6 +7,8 @@ before_script:
   - npm run build
 script:
   - npm test
+after_script:
+  - npm start
 deploy:
   provider: heroku
   app: e-commerce-api-react
