@@ -1,4 +1,6 @@
-#E-commerce api
+<h2>E-commerce api</h2>
+
+[![Build Status](https://travis-ci.org/luster02/api-dependency-injection.svg?branch=master)](https://travis-ci.org/luster02/api-dependency-injection)
 
 1. clone this
 2. install dependencies - npm install
