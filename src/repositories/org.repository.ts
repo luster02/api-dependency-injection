@@ -8,7 +8,7 @@ export class OrgRepository extends BaseRepository {
     }
 
     async getOwnerOrg(owner: any) {
-        return await _org.find({ owner })
+        return await _org.findOne({ owner })
     }
 
 }
