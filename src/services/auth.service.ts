@@ -19,7 +19,7 @@ export class AuthService {
         }
         const userCreated = await _userService.create(user)
         const userToEncode = {
-            id: userCreated._id,
+            _id: userCreated._id,
             name: userCreated.name,
         }
         const token = generateToken(userToEncode)
@@ -34,7 +34,7 @@ export class AuthService {
         }
         const userCreated = await _customerService.create(customer)
         const userToEncode = {
-            id: userCreated._id,
+            _id: userCreated._id,
             name: userCreated.name,
         }
         const token = generateToken(userToEncode)
@@ -53,7 +53,7 @@ export class AuthService {
             throw ErrorRequest(400, "invalid password")
         }
         const userToEncode = {
-            id: userExist._id,
+            _id: userExist._id,
             name: userExist.name,
         }
         const token = generateToken(userToEncode)
@@ -71,7 +71,7 @@ export class AuthService {
             throw ErrorRequest(400, "invalid password")
         }
         const customerToEncode = {
-            id: customerExist._id,
+            _id: customerExist._id,
             name: customerExist.name,
         }
         const token = generateToken(customerToEncode)
