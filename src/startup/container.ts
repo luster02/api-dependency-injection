@@ -29,7 +29,10 @@ import {
     ProductRoutes,
     OrgRoutes,
     UserRoutes,
-    AuthRoutes
+    AuthRoutes,
+    CartRoutes,
+    CustomerRoutes,
+    HistoryRoutes
 } from '../routes/index.route'
 import Routes from '../routes/index'
 //models
@@ -79,9 +82,9 @@ container
         ProductController: asClass(ProductController.bind(ProductController)).singleton(),
         UserController: asClass(UserController.bind(UserController)).singleton(),
         AuthController: asClass(AuthController.bind(AuthController)).singleton(),
-        CartController: asClass(CartController).singleton(),
-        CustomerController: asClass(CustomerController).singleton(),
-        HistoryController: asClass(HistoryController).singleton(),
+        CartController: asClass(CartController.bind(CartController)).singleton(),
+        CustomerController: asClass(CustomerController.bind(CustomerController)).singleton(),
+        HistoryController: asClass(HistoryController.bind(HistoryController)).singleton(),
     })
     .register({
         //routes register
@@ -89,7 +92,10 @@ container
         ProductRoutes: asFunction(ProductRoutes).singleton(),
         OrgRoutes: asFunction(OrgRoutes).singleton(),
         UserRoutes: asFunction(UserRoutes).singleton(),
-        AuthRoutes: asFunction(AuthRoutes).singleton()
+        AuthRoutes: asFunction(AuthRoutes).singleton(),
+        CartRoutes: asFunction(CartRoutes).singleton(),
+        CustomerRoutes: asFunction(CustomerRoutes).singleton(),
+        HistoryRoutes: asFunction(HistoryRoutes).singleton(),
     })
     .register({
         //models register
