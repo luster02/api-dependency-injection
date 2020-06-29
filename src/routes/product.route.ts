@@ -7,10 +7,10 @@ export const ProductRoutes = ({ ProductController }: any) => {
 
     router.get('/:orgId', verifyToken, ProductController.get)
     router.get('/', verifyToken, ProductController.getAll)
-    router.post('/', verifyToken, ProductController.create)
+    router.post('/:orgId', verifyToken, ProductController.create)
     router.patch('/:orgId', verifyToken, ProductController.update)
     router.patch('/img/:productId', [verifyToken, uploadStrategy], ProductController.updateImage)
-    router.delete('/', verifyToken, ProductController.delete)
+    router.delete('/:orgId/:productId', verifyToken, ProductController.delete)
 
     return router
 } 

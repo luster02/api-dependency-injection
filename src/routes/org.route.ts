@@ -11,8 +11,8 @@ export const OrgRoutes = ({ OrgController }: any) => {
     router.get('/', [verifyToken, cacheMidd(cacheHelp.ONE_MINUTE)], OrgController.getAll)
     router.get('/owner/:owner', [verifyToken, cacheMidd(cacheHelp.FIVE_MINUTES)], OrgController.getOwnerOrg)
     router.post('/', verifyToken, OrgController.create)
-    router.patch('/', verifyToken, OrgController.update)
-    router.patch('/logo', [verifyToken, uploadStrategy], OrgController.updateLogo)
+    router.patch('/:orgId', verifyToken, OrgController.update)
+    router.patch('/logo/:orgId', [verifyToken, uploadStrategy], OrgController.updateLogo)
     router.delete('/', verifyToken, OrgController.delete)
 
     return router
