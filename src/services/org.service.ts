@@ -1,6 +1,7 @@
 import { BaseService } from "./base.service";
 import { cloudinaryConfig, deletePhoto, uploadPhoto } from '../helpers/cludinary.helper'
 import { ErrorRequest } from '../helpers/error-request.helper'
+import { removeFile } from '../helpers/fs.helper'
 
 let _orgRepository: any = null
 let _config: any = null
@@ -41,8 +42,12 @@ export class OrgService extends BaseService {
             if (org.logoId) {
                 await deletePhoto(org.logoId)
             }
-            const { secure_url, public_id } = await uploadPhoto(file)
-            return await _orgRepository.update(orgId, { logoUrl: secure_url, logoId: public_id })
+            const { public_id, secure_url } = await uploadPhoto(file)
+            if (public_id) {
+                await removeFile(file)
+                return await _orgRepository.update(orgId, { logoUrl: secure_url, logoId: public_id })
+            }
+            return
         } catch (error) {
             console.log(error)
             return null
