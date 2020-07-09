@@ -13,5 +13,10 @@ export default {
     CLOUDINARY_ENV: process.env.CLOUDINARY_ENV,
     JWT_SECRET: process.env.JWT_SECRET,
     CACHE_KEY: process.env.CACHE_KEY,
-    STRIPE_KEY: process.env.STRIPE_KEY
+    STRIPE_KEY: process.env.STRIPE_KEY,
+    MAIL_HOST: process.env.MAIL_HOST,
+    MAIL_PORT: process.env.MAIL_PORT,
+    MAIL_USER: process.env.MAIL_USER,
+    MAIL_PASS: process.env.MAIL_PASS,
+    CLIENT_HOST: process.env.CLIENT_HOST
 }
