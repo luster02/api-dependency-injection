@@ -1,14 +1,18 @@
-import { generateToken } from '../helpers/jwt.helper'
+import { generateToken, generateTokenResetPassword } from '../helpers/jwt.helper'
 import { ErrorRequest } from '../helpers/error-request.helper'
+import { transpoter, createMessage } from '../helpers/nodemailer.helper'
+
 let _userService: any = null
 let _customerService: any
 let _cartService: any = null
+let _config: any = null
 
 export class AuthService {
-    constructor({ UserService, CustomerService, CartService }: any) {
+    constructor({ config, UserService, CustomerService, CartService }: any) {
         _userService = UserService
         _customerService = CustomerService
         _cartService = CartService
+        _config = config
     }
 
     async signUp(user: any) {
@@ -76,5 +80,44 @@ export class AuthService {
         }
         const token = generateToken(customerToEncode)
         return { token, user: customerExist }
+    }
+
+
+    async resetCustomerPassword(email: string) {
+        const customerExist: any = await _customerService.getCustomerByEmail(email)
+        if (!customerExist) {
+            throw ErrorRequest(400, "customer does not found")
+        }
+        const customerToEncode = {
+            _id: customerExist._id,
+            name: customerExist.name
+        }
+        const token = generateTokenResetPassword(customerToEncode)
+        return await transpoter.sendMail(
+            createMessage(
+                email,
+                'reset your password',
+                `${_config.CLIENT_HOST}/reset?token=${token}`
+            )
+        )
+    }
+
+    async resetUserPassword(email: string) {
+        const userExist: any = await _userService.getUserByEmail(email)
+        if (!userExist) {
+            throw ErrorRequest(400, "User does not found")
+        }
+        const customerToEncode = {
+            _id: userExist._id,
+            name: userExist.name
+        }
+        const token = generateTokenResetPassword(customerToEncode)
+        return await transpoter.sendMail(
+            createMessage(
+                email,
+                'reset your password',
+                `${_config.CLIENT_HOST}/reset?token=${token}`
+            )
+        )
     }
 }

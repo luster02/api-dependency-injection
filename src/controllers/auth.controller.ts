@@ -29,4 +29,17 @@ export class AuthController {
         const createdUser = await _authservice.registerCustomer(body)
         return res.status(201).json({ ok: true, data: createdUser })
     }
+
+    async resetCustomerPassword(req: Request, res: Response) {
+        const { body } = req
+        const mailInfo: any = await _authservice.resetCustomerPassword(body.email)
+        return res.status(200).json({ ok: true, data: mailInfo.messageId })
+    }
+
+    async resetUserPassword(req: Request, res: Response) {
+        const { body } = req
+        const mailInfo: any = await _authservice.resetUserPassword(body.email)
+        console.log(mailInfo)
+        return res.status(200).json({ ok: true, data: mailInfo.messageId })
+    }
 }
