@@ -31,6 +31,7 @@
     "mongoose-autopopulate": "^0.12.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
+    "nodemailer": "^6.4.10",
     "stripe": "^8.64.0"
   },
   "devDependencies": {
@@ -50,9 +51,14 @@
     "@types/mongoose-autopopulate": "^0.10.1",
     "@types/morgan": "^1.9.1",
     "@types/multer": "^1.4.3",
+    "@types/nodemailer": "^6.4.0",
+    "@types/nodemailer-direct-transport": "^1.0.31",
+    "@types/nodemailer-smtp-transport": "^2.7.4",
+    "install": "^0.13.0",
     "jest": "^26.0.1",
     "mockingoose": "^2.13.2",
     "nodemon": "^2.0.4",
+    "npm": "^6.14.6",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.0",
     "ts-node": "^8.10.2",
