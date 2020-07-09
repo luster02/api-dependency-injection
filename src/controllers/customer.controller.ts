@@ -9,26 +9,17 @@ export class CustomerController {
     async get(req: Request, res: Response) {
         const { customerID } = req.params
         const customer = await _customerService.get(customerID)
-        if (!customer) {
-            return res.json({ ok: false, data: 'error' })
-        }
         return res.json({ ok: true, data: customer })
     }
 
     async getCurrent(req: any, res: Response) {
         const { _id } = req.user
         const customer = await _customerService.get(_id)
-        if (!customer) {
-            return res.json({ ok: false, data: 'error' })
-        }
         return res.json({ ok: true, data: customer })
     }
 
     async getAll(req: Request, res: Response) {
         const customers = await _customerService.getAll()
-        if (!customers) {
-            return res.json({ ok: false, data: 'error' })
-        }
         return res.json({ ok: true, data: customers })
     }
 
@@ -36,9 +27,6 @@ export class CustomerController {
         const { body } = req
         const { customerID } = req.params
         const customer = await _customerService.update(customerID, body)
-        if (!customer) {
-            return res.json({ ok: false, data: 'error' })
-        }
         return res.json({ ok: true, data: customer })
     }
 

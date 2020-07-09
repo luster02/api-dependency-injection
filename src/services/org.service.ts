@@ -31,26 +31,22 @@ export class OrgService extends BaseService {
     }
 
     async updateLogo(orgId: any, file: any) {
-        try {
-            if (!orgId) {
-                throw ErrorRequest(400, "orgId must be sent")
-            }
-            const org = await _orgRepository.get(orgId)
-            if (!org) {
-                throw ErrorRequest(404, "org does not exist")
-            }
-            if (org.logoId) {
-                await deletePhoto(org.logoId)
-            }
-            const { public_id, secure_url } = await uploadPhoto(file)
-            if (public_id) {
-                await removeFile(file)
-                return await _orgRepository.update(orgId, { logoUrl: secure_url, logoId: public_id })
-            }
-            return
-        } catch (error) {
-            console.log(error)
-            return null
+        if (!orgId) {
+            throw ErrorRequest(400, "orgId must be sent")
+        }
+        const org = await _orgRepository.get(orgId)
+        if (!org) {
+            throw ErrorRequest(404, "org does not exist")
+        }
+        if (org.logoId) {
+            await deletePhoto(org.logoId)
+        }
+        const { public_id, secure_url } = await uploadPhoto(file)
+        if (public_id) {
+            await removeFile(file)
+            return await _orgRepository.update(orgId, { logoUrl: secure_url, logoId: public_id })
+        } else {
+            throw ErrorRequest(500, "error on save")
         }
     }
 

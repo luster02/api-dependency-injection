@@ -39,7 +39,6 @@ export class AuthController {
     async resetUserPassword(req: Request, res: Response) {
         const { body } = req
         const mailInfo: any = await _authservice.resetUserPassword(body.email)
-        console.log(mailInfo)
         return res.status(200).json({ ok: true, data: mailInfo.messageId })
     }
 }

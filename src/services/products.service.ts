@@ -33,8 +33,10 @@ export class ProductService extends BaseService {
             throw ErrorRequest(404, "org does not exist")
         }
         const createdProduct = await _productRepository.create(product)
+        if(!createdProduct) {
+            throw ErrorRequest(500, "error on create")
+        }
         org.products.push(createdProduct)
-
         return await _productRepository.update(orgId, { products: org.products })
     }
 
@@ -55,27 +57,22 @@ export class ProductService extends BaseService {
     }
 
     async updateImage(productId: any, file: any) {
-        try {
-            if (!productId) {
-                throw ErrorRequest(400, "productId must be sent")
-            }
-            const product = await _productRepository.get(productId)
-            if (!product) {
-                throw ErrorRequest(404, "product does not exist")
-            }
-            if (product.logoId) {
-                await deletePhoto(product.logoId)
-            }
-            const { secure_url, public_id } = await uploadPhoto(file)
-            if (public_id) {
-                await removeFile(file)
-                return await _productRepository.update(productId, { logoUrl: secure_url, logoId: public_id })
-            }
-            return
-        } catch (error) {
-            console.log(error)
-            return null
+        if (!productId) {
+            throw ErrorRequest(400, "productId must be sent")
         }
+        const product = await _productRepository.get(productId)
+        if (!product) {
+            throw ErrorRequest(404, "product does not exist")
+        }
+        if (product.logoId) {
+            await deletePhoto(product.logoId)
+        }
+        const { secure_url, public_id } = await uploadPhoto(file)
+        if (public_id) {
+            await removeFile(file)
+            return await _productRepository.update(productId, { logoUrl: secure_url, logoId: public_id })
+        }
+        throw ErrorRequest(500, "error on save")
     }
 
 }

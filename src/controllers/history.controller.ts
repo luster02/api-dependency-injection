@@ -9,27 +9,18 @@ export class HistoryController {
     async getHistoryByCustomer(req: any, res: Response) {
         const { _id } = req.user
         const history = await _historyService.getHistoryByCustomer(_id)
-        if (!history) {
-            return res.json({ ok: false, data: 'error' })
-        }
         return res.json({ ok: true, data: history })
     }
 
     async getHistoryByOrg(req: Request, res: Response) {
         const { orgID } = req.params
         const history = await _historyService.getHistoryByOrg(orgID)
-        if (!history) {
-            return res.json({ ok: false, data: 'error' })
-        }
         return res.json({ ok: true, data: history })
     }
 
     async get(req: Request, res: Response) {
         const { historyId } = req.params
         const history = await _historyService.get(historyId)
-        if (!history) {
-            return res.json({ ok: false, data: 'error' })
-        }
         return res.json({ ok: true, data: history })
     }
 
@@ -37,9 +28,6 @@ export class HistoryController {
         const { body } = req
         const { historyId } = req.params
         const history = await _historyService.update(historyId, body)
-        if (!history) {
-            return res.json({ ok: false, data: 'error' })
-        }
         return res.json({ ok: true, data: history })
     }
 }
