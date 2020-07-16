@@ -8,7 +8,7 @@ export const CartRoutes = ({ CartController }: any) => {
     router.get('/:customer', verifyToken, CartController.getCartByCustomer)
     router.get('/add/:product/:cartID', verifyToken, CartController.addProduct)
     router.get('/remove/:product/:cartID', verifyToken, CartController.removeProduct)
-    router.get('/price', verifyToken, CartController.getTotalPrice)
+    router.get('/price/:cartID', verifyToken, CartController.getTotalPrice)
     router.post('/pay/:cartID/:orgID', verifyToken, CartController.payCart)
 
     return router
