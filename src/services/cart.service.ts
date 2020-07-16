@@ -61,15 +61,15 @@ export class CartService extends BaseService {
         if (!cart) {
             throw ErrorRequest(404, "cart does not exist")
         }
-        let price: any
+        var price: number = 0
         cart.products.forEach((product: any) => {
-            price += parseFloat(product.price)
+            price += parseInt(product.price)
         })
-        console.log(price)
         return await _cartRepository.update(cartID, { totalPrice: price })
     }
 
     async payCart(cartID: string, totalPrice: number, customer: string, orgID: string) {
+        console.log(totalPrice)
         if (!cartID) {
             throw ErrorRequest(400, "cartID must be sent")
         }
@@ -79,11 +79,11 @@ export class CartService extends BaseService {
         }
         const history = await _historyService.createHistory(customer, orgID)
         const paymentIntent: Stripe.PaymentIntent = await stripe.paymentIntents.create({
-            amount: totalPrice,
+            amount: 1000,
             currency: 'usd',
             metadata: { integration_check: 'accept_a_payment' },
         })
-        if (!paymentIntent) {
+        if (!paymentIntent.client_secret) {
             await _historyService.delete(history._id)
             throw ErrorRequest(500, 'internal payment error')
         }
