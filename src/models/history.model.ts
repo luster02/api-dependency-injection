@@ -17,7 +17,8 @@ const HistorySchema = new Schema({
     customer: {
         type: Schema.Types.ObjectId,
         ref: 'Customer',
-        required: [true, 'owner is required']
+        required: [true, 'owner is required'],
+        autopopulate: true
     },
     org: {
         type: Schema.Types.ObjectId,
