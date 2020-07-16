@@ -33,11 +33,10 @@ export class ProductService extends BaseService {
             throw ErrorRequest(404, "org does not exist")
         }
         const createdProduct = await _productRepository.create(product)
-        if(!createdProduct) {
+        if (!createdProduct) {
             throw ErrorRequest(500, "error on create")
         }
-        org.products.push(createdProduct)
-        return await _productRepository.update(orgId, { products: org.products })
+        return await _orgRepository.update(orgId, { $push: { products: createdProduct } })
     }
 
     async deleteProduct(orgId: String, productId: any) {
@@ -53,7 +52,7 @@ export class ProductService extends BaseService {
 
         await _productRepository.delete(productId)
 
-        return await _productRepository.update(orgId, { products: org.products })
+        return await _orgRepository.update(orgId, { products: org.products })
     }
 
     async updateImage(productId: any, file: any) {
@@ -64,15 +63,16 @@ export class ProductService extends BaseService {
         if (!product) {
             throw ErrorRequest(404, "product does not exist")
         }
-        if (product.logoId) {
-            await deletePhoto(product.logoId)
+        if (product.imgID) {
+            await deletePhoto(product.imgID)
         }
         const { secure_url, public_id } = await uploadPhoto(file)
         if (public_id) {
             await removeFile(file)
-            return await _productRepository.update(productId, { logoUrl: secure_url, logoId: public_id })
+            return await _productRepository.update(productId, { imgUrl: secure_url, imgID: public_id })
+        } else {
+            throw ErrorRequest(500, "error on save")
         }
-        throw ErrorRequest(500, "error on save")
     }
 
 }
