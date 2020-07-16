@@ -43,8 +43,7 @@ export class CartController {
         if (cart) {
             const paymentIntent = await _cartService.payCart(cartID, cart.totalPrice, _id, orgID)
             if (paymentIntent) {
-
-                return res.json({ ok: true, data: cart })
+                return res.json({ ok: true, data: paymentIntent })
             } else {
                 return res.status(400).json({ ok: false, data: 'error' })
             }
