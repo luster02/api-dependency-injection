@@ -22,7 +22,6 @@ const OrgSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'org owner is required'],
-        //autopopulate: true
     },
     products: [{
         type: Schema.Types.ObjectId,
@@ -31,7 +30,6 @@ const OrgSchema = new Schema({
     }],
     logoUrl: {
         type: String,
-        default: 'https://res.cloudinary.com/dqnilvouh/image/upload/v1586642238/placeholder_zhy1ce.png'
     },
     logoId: {
         type: String
